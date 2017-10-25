@@ -34,12 +34,25 @@ namespace Testing
 			CPolyDrawable drawable(L"Harold");
 			Gdiplus::Color color = Gdiplus::Color::Black;
 
-			Assert::AreEqual(color, drawable.GetColor());
+			Assert::IsTrue(GetColorValue(drawable.GetColor(),color)==true);
 
 			Gdiplus::Color redColor = Gdiplus::Color::Red;
 			drawable.SetColor(redColor);
 
-			Assert::AreEqual(redColor, drawable.GetColor());
+			Assert::IsTrue(GetColorValue(drawable.GetColor(), redColor) == true);
+		}
+
+		bool GetColorValue(Gdiplus::Color color,Gdiplus::Color color2)
+		{
+			Gdiplus::ARGB value1 = color.GetValue();
+			Gdiplus::ARGB value2 = color2.GetValue();
+
+			if (value1 == value2)
+			{
+				return true;
+			}
+
+			return false;
 		}
 	};
 }
