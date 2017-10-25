@@ -1,3 +1,8 @@
+/**
+* \file PolyDrawable.cpp
+*
+* \author Ben Haase
+*/
 #include "stdafx.h"
 #include "PolyDrawable.h"
 
@@ -22,7 +27,14 @@ void CPolyDrawable::Draw(Gdiplus::Graphics *graphics)
 {
 	SolidBrush brush(mColor);
 
-	graphics->FillPolygon(&brush, &mPoints[0], (int)mPoints.size());
+	// Transform the points
+	vector<Point> points;
+	for (auto point : mPoints)
+	{
+		points.push_back(RotatePoint(point, mPlacedR) + mPlacedPosition);
+	}
+
+	graphics->FillPolygon(&brush, &points[0], (int)points.size());
 }
 
 
@@ -32,7 +44,16 @@ void CPolyDrawable::Draw(Gdiplus::Graphics *graphics)
 */
 bool CPolyDrawable::HitTest(Gdiplus::Point pos)
 {
-	return false;
+	// Transform the points
+	vector<Point> points;
+	for (auto point : mPoints)
+	{
+		points.push_back(RotatePoint(point, mPlacedR) + mPlacedPosition);
+	}
+
+	GraphicsPath path;
+	path.AddPolygon(&points[0], (int)points.size());
+	return path.IsVisible(pos) ? true : false;
 }
 
 /**

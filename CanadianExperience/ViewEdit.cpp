@@ -12,9 +12,10 @@
 #include "DoubleBufferDC.h"
 #include "MainFrm.h"
 #include "Picture.h"
+#include "Actor.h"
+#include "Drawable.h"
 
-using namespace std;
-using namespace Gdiplus;
+
 
 IMPLEMENT_DYNCREATE(CViewEdit, CScrollView)
 
@@ -80,7 +81,41 @@ BOOL CViewEdit::OnEraseBkgnd(CDC* pDC)
 void CViewEdit::OnLButtonDown(UINT nFlags, CPoint point)
 {
 
-    __super::OnLButtonDown(nFlags, point);
+	// Convert mouse coordinates to logical coordinates
+	CClientDC dc(this);
+	OnPrepareDC(&dc);
+	dc.DPtoLP(&point);
+
+	mLastMouse = Gdiplus::Point(point.x, point.y);
+
+	//
+	// Did we hit anything?
+	//
+
+	std::shared_ptr<CActor> hitActor;
+	std::shared_ptr<CDrawable> hitDrawable;
+	for (auto actor : *GetPicture())
+	{
+		// Note: We do not exit when we get the first hit, since
+		// we are looking at these in drawing order. Instead, we
+		// keep the last hit.
+		std::shared_ptr<CDrawable> drawable = actor->HitTest(Point(point.x, point.y));
+		if (drawable != nullptr)
+		{
+			hitActor = actor;
+			hitDrawable = drawable;
+		}
+	}
+
+	// If we hit something determine what we do with it based on the
+	// current mode.
+	if (hitActor != NULL)
+	{
+		mActor = hitActor;
+		mDrawable = hitDrawable;
+	}
+
+	__super::OnLButtonDown(nFlags, point);
 
 }
 
@@ -93,7 +128,53 @@ void CViewEdit::OnLButtonDown(UINT nFlags, CPoint point)
 void CViewEdit::OnMouseMove(UINT nFlags, CPoint point)
 {
 
-    __super::OnMouseMove(nFlags, point);
+	// Convert mouse coordinates to logical coordinates
+	CClientDC dc(this);
+	OnPrepareDC(&dc);
+	dc.DPtoLP(&point);
+	Gdiplus::Point newMouse(point.x, point.y);
+	Gdiplus::Point delta = newMouse - mLastMouse;
+	mLastMouse = newMouse;
+
+	if (nFlags & MK_LBUTTON)
+	{
+		switch (mMainFrame->GetMode())
+		{
+		case CMainFrame::Move:
+			if (mDrawable != nullptr)
+			{
+				if (mDrawable->IsMovable())
+				{
+					mDrawable->Move(delta);
+				}
+				else
+				{
+					mActor->SetPosition(mActor->GetPosition() + delta);
+				}
+				GetPicture()->UpdateObservers();
+			}
+			break;
+
+		case CMainFrame::Rotate:
+			if (mDrawable != nullptr)
+			{
+				mDrawable->SetRotation(mDrawable->GetRotation() + delta.Y * RotationScaling);
+				GetPicture()->UpdateObservers();
+			}
+			break;
+
+		default:
+			break;
+		}
+
+	}
+	else
+	{
+		mDrawable = nullptr;
+		mActor = nullptr;
+	}
+
+	__super::OnMouseMove(nFlags, point);
 }
 
 // Doxygen sometimes gets confused by these message 

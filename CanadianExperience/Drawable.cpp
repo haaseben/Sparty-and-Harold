@@ -1,3 +1,8 @@
+/**
+* \file Drawable.cpp
+*
+* \author Ben Haase
+*/
 #include "stdafx.h"
 #include "Drawable.h"
 
@@ -33,7 +38,16 @@ void CDrawable::SetActor(CActor *actor)
 */
 void CDrawable::Place(Gdiplus::Point offset, double rotate)
 {
+	// Combine the transformation we are given with the transformation
+	// for this object.
+	mPlacedPosition = offset + RotatePoint(mPosition, rotate);
+	mPlacedR = mRotation + rotate;
 
+	// Update our children
+	for (auto drawable : mChildren)
+	{
+		drawable->Place(mPlacedPosition, mPlacedR);
+	}
 }
 
 
@@ -43,7 +57,8 @@ void CDrawable::Place(Gdiplus::Point offset, double rotate)
 */
 void CDrawable::AddChild(std::shared_ptr<CDrawable> child)
 {
-
+	mChildren.push_back(child);
+	child->SetParent(this);
 }
 
 
@@ -55,7 +70,14 @@ void CDrawable::AddChild(std::shared_ptr<CDrawable> child)
 */
 void CDrawable::Move(Gdiplus::Point delta)
 {
-
+	if (mParent != nullptr)
+	{
+		mPosition = mPosition + RotatePoint(delta, -mParent->mPlacedR);
+	}
+	else
+	{
+		mPosition = mPosition + delta;
+	}
 }
 
 
@@ -67,5 +89,9 @@ void CDrawable::Move(Gdiplus::Point delta)
 */
 Gdiplus::Point CDrawable::RotatePoint(Gdiplus::Point point, double angle)
 {
-	return Gdiplus::Point(0, 0);
+	double cosA = cos(angle);
+	double sinA = sin(angle);
+
+	return Gdiplus::Point(int(cosA * point.X + sinA * point.Y),
+		int(-sinA * point.X + cosA * point.Y));
 }

@@ -1,3 +1,8 @@
+/**
+* \file Actor.cpp
+*
+* \author Ben Haase
+*/
 #include "stdafx.h"
 #include "Actor.h"
 #include "Picture.h"

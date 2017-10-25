@@ -60,5 +60,21 @@ namespace Testing
 
 			Assert::AreEqual(a, drawable.GetRotation(), 0.00001);
 		}
+
+		TEST_METHOD(TestCDrawableAssociation)
+		{
+			CDrawableMock body(L"Body");
+			auto arm = std::make_shared<CDrawableMock>(L"Arm");
+			auto leg = std::make_shared<CDrawableMock>(L"Leg");
+
+			Assert::IsNull(arm->GetParent());
+			Assert::IsNull(leg->GetParent());
+
+			body.AddChild(arm);
+			body.AddChild(leg);
+
+			Assert::IsTrue(arm->GetParent() == &body);
+			Assert::IsTrue(leg->GetParent() == &body);
+		}
 	};
 }

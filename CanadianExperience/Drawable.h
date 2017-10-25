@@ -11,6 +11,10 @@
 
 #include<memory>
 #include<string>
+#include<vector>
+#include<cmath>
+
+using namespace std;
 
 class CActor;
 
@@ -59,6 +63,14 @@ public:
 	* \returns The drawable name */
 	std::wstring GetName() const { return mName; }
 
+	/** Get the drawable parent
+	* \returns The drawable parent */
+	CDrawable* GetParent() { return mParent; }
+
+	/** Parent Setter
+	* \param parent Parent to set mParent to */
+	void SetParent(CDrawable* parent) { mParent = parent; }
+
 protected:
 	CDrawable(const std::wstring &name);
 	Gdiplus::Point RotatePoint(Gdiplus::Point point, double angle);
@@ -81,6 +93,12 @@ private:
 	double mRotation = 0;
 
 	/// The actor using this drawable
-	CActor *mActor = nullptr;
+	CActor* mActor = nullptr;
+
+	///parent of drawable
+	CDrawable* mParent=nullptr;
+
+	///list of children of drawable
+	std::vector<std::shared_ptr<CDrawable>> mChildren;
 };
 

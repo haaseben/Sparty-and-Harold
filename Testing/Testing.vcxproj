@@ -99,6 +99,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="CImageDrawableTest.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="CPictureObserverTest.cpp">
       <SubType>
       </SubType>
