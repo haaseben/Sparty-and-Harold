@@ -8,8 +8,10 @@
 #include <memory>
 #include "Picture.h"
 
-using namespace std;
 
+
+using namespace std;
+using namespace Gdiplus;
 /**
 * A factory class that builds our picture.
 */

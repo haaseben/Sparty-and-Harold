@@ -100,8 +100,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="ActorFactory.h" />
     <ClInclude Include="CanadianExperience.h" />
     <ClInclude Include="Drawable.h" />
+    <ClInclude Include="HaroldFactory.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="DoubleBufferDC.h" />
     <ClInclude Include="Picture.h" />
@@ -118,8 +120,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="ActorFactory.cpp" />
     <ClCompile Include="CanadianExperience.cpp" />
     <ClCompile Include="Drawable.cpp" />
+    <ClCompile Include="HaroldFactory.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="Picture.cpp" />
     <ClCompile Include="PictureFactory.cpp" />

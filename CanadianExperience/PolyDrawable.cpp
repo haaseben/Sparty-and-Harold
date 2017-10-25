@@ -20,7 +20,9 @@ CPolyDrawable::~CPolyDrawable()
 */
 void CPolyDrawable::Draw(Gdiplus::Graphics *graphics)
 {
+	SolidBrush brush(mColor);
 
+	graphics->FillPolygon(&brush, &mPoints[0], (int)mPoints.size());
 }
 
 
@@ -37,7 +39,7 @@ bool CPolyDrawable::HitTest(Gdiplus::Point pos)
 * Add a point to polydrawble
 * \param point The point to add
 */
-void CPolyDrawable::AddPoint(std::shared_ptr<CPolyDrawable> point)
+void CPolyDrawable::AddPoint(Gdiplus::Point point)
 {
-
+	mPoints.push_back(point);
 }

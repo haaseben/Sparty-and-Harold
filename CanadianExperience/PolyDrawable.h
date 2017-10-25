@@ -12,7 +12,7 @@
 #include <vector>
 
 
-
+using namespace Gdiplus;
 /**
 * A drawable based on polygon images.
 */
@@ -40,7 +40,7 @@ public:
 
 	virtual void Draw(Gdiplus::Graphics *graphics) override;
 	virtual bool HitTest(Gdiplus::Point pos) override;
-	void AddPoint(std::shared_ptr<CPolyDrawable> point);
+	void AddPoint(Gdiplus::Point point);
 
 
 private:
