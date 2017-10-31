@@ -8,6 +8,7 @@
 #include "PictureFactory.h"
 #include "HaroldFactory.h"
 #include "ImageDrawable.h"
+#include "SpartyFactory.h"
 
 /** Constructor */
 CPictureFactory::CPictureFactory()
@@ -45,6 +46,15 @@ std::shared_ptr<CPicture> CPictureFactory::Create()
 	harold->SetPosition(Point(400, 500));
 
 	picture->AddActor(harold);
+
+	// Create and add Sparty
+	CSpartyFactory factory1;
+	auto sparty = factory1.Create();
+
+	// This is where Sparty will start out.
+	sparty->SetPosition(Point(700, 400));
+
+	picture->AddActor(sparty);
 
 	return picture;
 }

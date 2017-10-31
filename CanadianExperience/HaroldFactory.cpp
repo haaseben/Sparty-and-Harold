@@ -8,6 +8,7 @@
 #include "PolyDrawable.h"
 #include "Actor.h"
 #include "ImageDrawable.h"
+#include "HeadTop.h"
 
 /** Constructor */
 CHaroldFactory::CHaroldFactory()
@@ -51,7 +52,7 @@ std::shared_ptr<CActor> CHaroldFactory::Create()
 	headb->SetPosition(Point(0, -130));
 	shirt->AddChild(headb);
 
-	auto headt = make_shared<CImageDrawable>(L"Head Top", L"images/harold_headt_blank.png");
+	auto headt = make_shared<CHeadTop>(L"Head Top", L"images/harold_headt_blank.png");
 	headt->SetCenter(Point(55, 109));
 	headt->SetPosition(Point(0, -31));
 	headb->AddChild(headt);

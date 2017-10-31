@@ -1,9 +1,19 @@
+/**
+* \File ImageDrawable.h
+*
+*
+* Creates an image drawable
+* \author Ben Haase
+*/
 #pragma once
 #include "Drawable.h"
 #include <memory>
 
 using namespace Gdiplus;
 
+/**
+* Creates an image drawable
+*/
 class CImageDrawable :
 	public CDrawable
 {
@@ -22,9 +32,11 @@ public:
 	void SetCenter(Gdiplus::Point center) { mCenter = center; }
 
 protected:
-	Gdiplus::Point mCenter = Gdiplus::Point(0, 0);
-private:
+
 	/// The image for this drawable
 	std::unique_ptr<Gdiplus::Bitmap> mImage;
+private:
+	///center of drawable
+	Gdiplus::Point mCenter = Gdiplus::Point(0, 0);
 };
 
