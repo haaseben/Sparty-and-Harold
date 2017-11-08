@@ -41,7 +41,7 @@ void CPolyDrawable::Draw(Gdiplus::Graphics *graphics)
 /**
 * Hit test point
 * \param pos Point to be hit tested
-*/
+* \return true if clicked on */
 bool CPolyDrawable::HitTest(Gdiplus::Point pos)
 {
 	// Transform the points

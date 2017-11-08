@@ -79,9 +79,13 @@ public:
 	CPicture* GetPicture() { return mPicture; }
 
 private:
+	///name of actor
 	std::wstring mName;
+	///flag whether enabled is active
 	bool mEnabled = true;
+	///postition of actor
 	Gdiplus::Point mPosition = Gdiplus::Point(0, 0);
+	///flag whether actor is clickable or not
 	bool mClickable = true;
 
 	/// The root drawable

@@ -37,8 +37,17 @@ public:
 	void CDrawable::Place(Gdiplus::Point offset, double rotate);
 	void CDrawable::AddChild(std::shared_ptr<CDrawable> child);
 	void CDrawable::Move(Gdiplus::Point delta);
+
+	/**  Test this item to see if it has been clicked on
+	* \param pos Point to be hit tested
+	* \return true if clicked on */
 	virtual bool HitTest(Gdiplus::Point pos) = 0;
+	/**  Bool for movable object
+	* \return true if movable */
 	virtual bool IsMovable() { return false; }
+	/**  Test this item to see if it has been clicked on
+	* \param graphics Graphics used for drawing
+	 */
 	virtual void Draw(Gdiplus::Graphics *graphics) = 0;
 
 

@@ -21,7 +21,7 @@ CSpartyFactory::~CSpartyFactory()
 std::shared_ptr<CActor> CSpartyFactory::Create()
 {
 	shared_ptr<CActor> actor = make_shared<CActor>(L"sparty");
-
+	
 	auto shirt = make_shared<CImageDrawable>(L"Shirt", L"images/sparty_torso.png");
 	shirt->SetCenter(Point(44, 138));
 	shirt->SetPosition(Point(0, -114));
@@ -43,10 +43,10 @@ std::shared_ptr<CActor> CSpartyFactory::Create()
 	shirt->AddChild(headb);
 
 	auto headt = make_shared<CHeadTop>(L"Head Top", L"images/sparty_head.png");
+	headt->ChangeState();
 	headt->SetCenter(Point(55, 109));
 	headt->SetPosition(Point(13, -60));
 	headb->AddChild(headt);
-
 
 	auto larm = make_shared<CImageDrawable>(L"Left Arm", L"images/sparty_larm.png");
 	larm->SetCenter(Point(0, 0));

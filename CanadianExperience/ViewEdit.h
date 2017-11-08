@@ -32,6 +32,8 @@ public:
 	*/
 	void SetMainFrame(CMainFrame *mainFrame) { mMainFrame = mainFrame; }
 
+	/** Force an update of this window when the picture changes.
+	*/
 	virtual void UpdateObserver() override;
 
 protected:

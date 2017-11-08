@@ -64,7 +64,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>StdAfx;ViewEdit;ViewTimeLine;Picture;PictureObserver;CanadianExperience;MainFrm;Actor;Drawable;PolyDrawable;ImageDrawable;PictureFactory;HaroldFactory;ActorFactory;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>StdAfx;ViewEdit;ViewTimeLine;Picture;PictureObserver;CanadianExperience;MainFrm;Actor;Drawable;PolyDrawable;ImageDrawable;PictureFactory;HaroldFactory;ActorFactory;SpartyFactory;HeadTop;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

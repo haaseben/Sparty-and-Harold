@@ -1,11 +1,13 @@
 /**
 * \File ActorFactory.h
 *
+* Class for abstract factories
 *
-* Abstract base class for actor factories.
 * \author Ben Haase
 */
 #pragma once
+
+
 /**
 * Abstract base class for actor factories.
 */

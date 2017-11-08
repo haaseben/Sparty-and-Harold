@@ -1,8 +1,7 @@
 /**
 * \File HeadTop.h
 *
-*
-* Creates the head
+* Class for creating the top part of the head for an actor
 * \author Ben Haase
 */
 #pragma once
@@ -21,54 +20,25 @@ public:
 	Gdiplus::Point CHeadTop::TransformPoint(Gdiplus::Point p);
 
 	void Draw(Gdiplus::Graphics *graphics) override;
+	/**  Bool for movable object
+	* \return true if movable */
 	bool IsMovable() override { return true; } ;
+	void CHeadTop::LoadImage(std::unique_ptr<Gdiplus::Bitmap> &image, std::wstring name);
+	
+	///possible states of the actors
+	enum States{Harold,Sparty};
 
-
-	/** Set the drawable position
-	* \param pos The new drawable position*/
-	void SetStart(int pos) { mStart = pos; }
-
-	/** Get the drawable position
-	* \returns The drawable position*/
-	int GetStart() const { return mStart; }
-
-
-	/** Set the drawable position
-	* \param pos The new drawable position*/
-	void SetEnd(int pos) { mEnd = pos; }
-
-	/** Get the drawable position
-	* \returns The drawable position*/
-	int GetEnd() const { return mEnd; }
-
-	/** Set the drawable position
-	* \param pos The new drawable position*/
-	void SetX(int pos) { mX = pos; }
-
-	/** Get the drawable position
-	* \returns The drawable position*/
-	int GetX() const { return mX; }
-
-	/** Set the drawable position
-	* \param pos The new drawable position*/
-	void SetY(int pos) { mY = pos; }
-
-	/** Get the drawable position
-	* \returns The drawable position*/
-	int GetY() const { return mY; }
+	void CHeadTop::ChangeState();
 
 private:
-	///start of eyebrows
-	int mStart = 55;
 
-	///end of eyebrows
-	int mEnd = 60;
+	/// The image of the left eye
+	std::unique_ptr<Gdiplus::Bitmap> mLeftEye;
 
-	///x for eye
-	int mX = 80;
+	/// The image of the right eye
+	std::unique_ptr<Gdiplus::Bitmap> mRightEye;
 
-	///y for eye
-	int mY = 100;
-
+	///current state of draw
+	States mState=Harold;
 };
 

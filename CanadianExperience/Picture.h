@@ -60,6 +60,7 @@ public:
 		Iter(CPicture *picture, int pos) : mPicture(picture), mPos(pos) {}
 
 		/** Test for end of the iterator
+		* \param other is another iter to check against
 		* \returns True if we this position equals not equal to the other position */
 		bool operator!=(const Iter &other) const
 		{
